@@ -1,0 +1,49 @@
+/* Общий стиль для приложения */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #181818; /* темный фон */
+    color: #ffffff;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.app-header {
+    font-size: 24px;
+    color: #4CAF50; /* зеленый цвет для заголовка */
+    margin-bottom: 20px;
+}
+
+.app-content {
+    background-color: #2b2b2b; /* цвет фона для калькулятора */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Стиль для формы ввода */
+label {
+    display: block;
+    margin: 10px 0;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background-color: #444;
+    border: 1px solid #666;
+    color: #fff;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #409a1a;
+}
