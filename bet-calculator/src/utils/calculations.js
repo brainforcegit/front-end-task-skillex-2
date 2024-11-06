@@ -1,7 +1,8 @@
 import {STATUSES_ENUM} from "../constants/enums";
 
-export function getCombinations(odds, systemType) {
+export function getCombinations(odds, systemType,statuses) {
   const [select, from] = systemType.split(' from ').map(Number);
+  console.log(statuses,'statuses',systemType,odds)
 
   if (isNaN(select) || isNaN(from) || select < 0 || from < 0) {
     console.error('Invalid input: select and from must be non-negative numbers.');
@@ -16,7 +17,6 @@ export function getCombinations(odds, systemType) {
   // Ensure all odds are numbers
   const selectedOdds = odds.slice(0, from).map(Number);
   console.log('Selected Odds:', selectedOdds);  // Add this log
-
   if (!Array.isArray(selectedOdds) || selectedOdds.length === 0 || selectedOdds.some(isNaN)) {
     console.error('Selected odds must be a non-empty array of numbers.');
     return [];
@@ -47,32 +47,16 @@ export function getCombinations(odds, systemType) {
 }
 
 export function calculateWinnings(combinations, stake, statuses) {
-  return combinations.map((combination, comboIndex) => {
-    // Рассчитываем итоговый коэффициент для комбинации с учетом статусов
-    const adjustedOdds = combination.map((odd, oddIndex) => odd * STATUSES_ENUM[statuses[comboIndex][oddIndex]]);
+  return combinations.map((combination,index) => {
+    console.log(combination,'combination')
+    const adjustedOdds = combination.map((odd) => {
+      const statusMultiplier = STATUSES_ENUM[statuses[index]] || 1;
+      return odd * statusMultiplier;
+    });
+
     const odds = adjustedOdds.reduce((acc, odd) => acc * odd, 1);
 
-    // Вычисляем выигрыш для комбинации
     const winnings = odds * (stake / combinations.length);
     return { combination, odds, winnings };
   });
 }
-
-
-
-// im grace
-// export function calculateWinnings(combinations, stake, statuses) {
-//   console.log(statuses,'statuses')
-//   const validCombinations = combinations.map((combo,index) => {
-//     console.log(combo,index,'com')
-//     return combo
-//   });
-//   console.log(validCombinations,'validCombinations')
-//
-//   return validCombinations.map((combination,index) => {
-//     console.log(statuses[index],'statuses[index]',index)
-//     const odds = combination.reduce((acc, odd) => acc * Number(odd), 1) * STATUSES_ENUM[statuses[index]];
-//     const winnings = odds * (stake / validCombinations.length)  ;
-//     return { combination, odds, winnings };
-//   });
-// }
