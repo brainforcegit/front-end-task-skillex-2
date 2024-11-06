@@ -41,9 +41,8 @@ console.log(statuses)
       return;
     }
 
-    const generatedCombinations = getCombinations(odds, systemType);
+    const generatedCombinations = getCombinations(odds, systemType,statuses);
     setCombinations(generatedCombinations);
-console.log(statuses,'statuses')
     const winnings = calculateWinnings(generatedCombinations, totalStake, statuses);
     setResults(winnings);
   };
